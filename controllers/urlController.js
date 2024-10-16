@@ -35,51 +35,11 @@ exports.shortenUrl = catchAsync(async (req, res, next) => {
 
   const result = await Url.create(body);
   const fullUrl = `${req.protocol}://${req.get('host')}/shorten/${shortUrl}`
- res.send(`
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Url shortener</title>
-        <style>
-            #textToCopy {
-                padding: 10px;
-                border: 1px solid #ccc;
-                width: 300px;
-                margin-bottom: 10px;
-            }
-        </style>
-    </head>
-    <body>
-        <center>
-        <h1>URL SHORTENER</h1>
-        <div id="textToCopy">${fullUrl}</div>
-        <button id="copyButton">Copy Text</button>
-        </center>
-        
-        <script>
-            document.getElementById('copyButton').addEventListener('click', function() {
-                // Get the text from the div
-                const textToCopy = document.getElementById('textToCopy').innerText;
 
-                // Create a temporary textarea element to hold the text
-                const textarea = document.createElement('textarea');
-                textarea.value = textToCopy;
-                document.body.appendChild(textarea);
-                textarea.select(); // Select the text
-                document.execCommand('copy'); // Execute the copy command
-                document.body.removeChild(textarea); // Remove the temporary textarea
-
-                // Optional: Show a message that text has been copied
-                alert('Text copied to clipboard: ' + textToCopy);
-            });
-        </script>
-    </body>
-    </html>
-  `);
-  
-
+  res.status(200).json({
+    message: 'success',
+    shortUrl: fullUrl
+  })
 });
 
 exports.getUrl = catchAsync(async (req, res, next) => {
