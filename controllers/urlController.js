@@ -4,7 +4,7 @@ const Url = require("../models/urlModel");
 const catchAsync = require("../utils/catchAsync");
 const AppError = require("../utils/appError");
 
-const generateShortUrl = async () => {
+exports.generateShortUrl = async () => {
   let isUnique = false;
   let shortUrl;
 
