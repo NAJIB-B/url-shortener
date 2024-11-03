@@ -17,8 +17,10 @@ app.use(express.urlencoded({extended: true}))
 
 //app.use(express.static(path.join(__dirname, "public")))
 
-
-
+app.get('/test', (req, res) => {
+    console.log('Hit /test route');
+    res.send('This is a test route');
+});
 app.use("/api/v1/shorten", urlRouter)
 app.use("/", viewRouter)
 
